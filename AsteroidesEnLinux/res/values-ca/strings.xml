@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Aplicacio1</string>
+    <string name="action_settings">Opcions</string>
+    <string name="aplicacion">Aplicació</string>
+    <string name="jugar">Jugar</string>
+    <string name="configurar">Configurar</string>
+    <string name="acercade">En quant a</string>
+    <string name="salir">Puntuacions</string>
+    <string name="sobreAplicacion">Aquesta aplicació ha sigut creada per..</string>
+    <string name="configuracio">Configuració</string>
+    <string name="sobre">Sobre..</string>
+    <string name="pa_key">Preferències Principals</string>
+    <string name="p1_summary">Es reprodueix música de fons</string>
+    <string name="p1_title">Reproduir música</string>
+    <string name="p1_key">Música</string>
+    <string name="p2_key">Gràfics</string>
+    <string name="p2_summary">S escolleig la representació de gràfics</string>
+    <string name="p3_key">Fragments</string>
+    <string name="p3_title">Nombre de fragments</string>
+    <string name="p3_summary">En cuants de troços es divideix un asteroide</string>
+    <string name="p2_title">Tipus de gràficos</string>
+
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Aplicacio1</string>
+    <string name="action_settings">Settings</string>
+    <string name="aplicacion">Application</string>
+    <string name="jugar">Play</string>
+    <string name="configurar">Configure</string>
+    <string name="acercade">About</string>
+    <string name="salir">Scores</string>
+    <string name="sobreAplicacion">This application was created by..</string>
+    <string name="configuracio">Settins</string>
+    <string name="sobre">About..</string>
+    <string name="pa_key">Principal Preferences</string>
+    <string name="p1_summary">Background music</string>
+    <string name="p1_title">Play music</string>
+    <string name="p1_key">Music</string>
+    <string name="p2_key">Graphics</string>
+    <string name="p2_summary">Choose graphics representations</string>
+    <string name="p3_key">Fragments</string>
+    <string name="p3_title">Number of fragments</string>
+    <string name="p3_summary">How many pieces divide the androids</string>
+    <string name="p2_title">Kinds of graphics</string>
+    
+</resources>
