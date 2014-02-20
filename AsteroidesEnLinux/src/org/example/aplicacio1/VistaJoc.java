@@ -38,6 +38,7 @@ public class VistaJoc extends View implements SensorEventListener{
 	private Vector<Grafic> Asteroides; // Vector amb els asteroides
 	private int numAsteroides = 15; // Numero inicial de Asteroides
 	private int numFragments = 3; // Fragments en que es divideix
+	private Drawable drawableAsteroide[] = new Drawable[numFragments];
 	// Variables per la NAU
 	private Grafic nau;
 	private int girNau; // increment de direcio
@@ -80,7 +81,7 @@ public class VistaJoc extends View implements SensorEventListener{
 		super(context, attrs);
 		// Declara i obte les imatges
 		this.context = context;
-		Drawable drawableNau, drawableAsteroide;
+		Drawable drawableNau;
 		
 		SharedPreferences pref = context.getSharedPreferences("org.example.aplicacio1_preferences", Context.MODE_PRIVATE);
 		if (pref.getString("grafics","1").equals("0")) {
@@ -97,14 +98,17 @@ public class VistaJoc extends View implements SensorEventListener{
 			pathAsteroide.lineTo((float)0.0, (float)0.6);
 			pathAsteroide.lineTo((float)0.0, (float)0.2);
 			pathAsteroide.lineTo((float)0.3, (float)0.0);
-			ShapeDrawable dAsteroide = new ShapeDrawable (new PathShape(pathAsteroide,1 ,1));
-			dAsteroide.getPaint().setColor(Color.WHITE);
-			dAsteroide.getPaint().setStyle(Style.STROKE);
-			dAsteroide.setIntrinsicWidth(50);
-			dAsteroide.setIntrinsicHeight(50);
-			drawableAsteroide = dAsteroide;
-			setBackgroundColor(Color.BLACK);
 			
+			for (int i=0; i<3; i++) {
+				ShapeDrawable dAsteroide = new ShapeDrawable (new PathShape(pathAsteroide,1 ,1));
+				dAsteroide.getPaint().setColor(Color.WHITE);
+				dAsteroide.getPaint().setStyle(Style.STROKE);
+				dAsteroide.setIntrinsicWidth(50-i*14);
+				dAsteroide.setIntrinsicHeight(50-i*14);
+				drawableAsteroide[1] = dAsteroide;
+			}
+			
+			setBackgroundColor(Color.BLACK);
 			// Nau
 			Path pathNau = new Path();
 			pathNau.lineTo((float)1.0, (float)0.5);
@@ -127,7 +131,9 @@ public class VistaJoc extends View implements SensorEventListener{
 			drawableMissil = dMissil;
 			
 		} else {
-			drawableAsteroide = context.getResources().getDrawable(R.drawable.asteroide1);
+			drawableAsteroide[0] = context.getResources().getDrawable(R.drawable.asteroide1);
+			drawableAsteroide[1] = context.getResources().getDrawable(R.drawable.asteroide2);
+			drawableAsteroide[2] = context.getResources().getDrawable(R.drawable.asteroide3);
 			drawableNau = context.getResources().getDrawable(R.drawable.nau);
 			drawableMissil = context.getResources().getDrawable(R.drawable.missil1);
 		}
@@ -141,7 +147,7 @@ public class VistaJoc extends View implements SensorEventListener{
 		// inicialitza els asteroides
 		Asteroides = new Vector<Grafic>();
 		for (int i = 0; i<numAsteroides; i++) {
-			Grafic asteroide = new Grafic(this, drawableAsteroide);
+			Grafic asteroide = new Grafic(this, drawableAsteroide[0]);
 			asteroide.setIncY(Math.random()*4-2);
 			asteroide.setIncX(Math.random()*4-2);
 			asteroide.setAngle((int) (Math.random()*360));
@@ -269,6 +275,24 @@ public class VistaJoc extends View implements SensorEventListener{
 	
 	// Metodes auxiliars
 	private void detrueixAsteroide(int i) {
+		int tam;
+		if (Asteroides.get(i).getDrawable()!=drawableAsteroide[2]){
+			if (Asteroides.get(i).getDrawable()==drawableAsteroide[1]){
+				tam = 2;
+			}else {
+				tam = 1;
+			}
+			for (int n=0; n<numFragments; n++) {
+				Grafic asteroide = new Grafic (this, drawableAsteroide[tam]);
+				asteroide.setPosX(Asteroides.get(i).getPosX());
+				asteroide.setPosY(Asteroides.get(i).getPosY());
+				asteroide.setIncX(Math.random()*7.2-tam);
+				asteroide.setIncY(Math.random()*7.2-tam);
+				asteroide.setAngle((int)(Math.random()*360));
+				asteroide.setRotacio((int)(Math.random()*8-4));
+				Asteroides.add(asteroide);
+			}
+		}
 		Asteroides.remove(i);
 	}
 	// El missil i els seu temps van a la par
