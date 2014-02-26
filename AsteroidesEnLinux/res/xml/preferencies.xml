@@ -24,6 +24,7 @@
 
     <EditTextPreference
         android:defaultValue="3"
+        android:inputType="number"
         android:key="@string/frag_key"
         android:summary="@string/p3_summary"
         android:title="@string/p3_title" />

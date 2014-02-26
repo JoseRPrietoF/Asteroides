@@ -169,7 +169,7 @@ public class VistaJoc extends View implements SensorEventListener{
 			if (str.equals("3")) sensors = true;
 		}
 		if (!tactil && !teclat && !sensors){
-			Toast.makeText(getContext(), "No pots moure la nau! s'ha activat la part tàctil", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getContext(), "No pots moure la nau! s'ha activat la part tï¿½ctil", Toast.LENGTH_SHORT).show();
 			tactil = true;
 		}
 		
@@ -179,8 +179,12 @@ public class VistaJoc extends View implements SensorEventListener{
 
 		maxJugador = pref.getInt("maxJugadorsKey", 3);
 		
-		// Agafem el número de fragments
-		//numFragments = pref.getInt("frag_key", 5);
+		// Agafem el nï¿½mero de fragments
+		try{
+			numFragments = pref.getInt("frag_key", 5);
+		} catch (NumberFormatException e){
+			numFragments = 3;
+		}
 		Toast.makeText(getContext(), ""+numFragments, Toast.LENGTH_LONG).show();
 		
 		// Inicialitza so

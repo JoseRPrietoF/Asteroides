@@ -2,7 +2,6 @@ package org.example.aplicacio1;
 
 import java.util.ArrayList;
 import java.util.Set;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +26,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+import servicios.*;
 
 public class Localitzacio extends Activity implements OnClickListener,
 		OnLongClickListener, OnGesturePerformedListener {
@@ -41,7 +41,7 @@ public class Localitzacio extends Activity implements OnClickListener,
 	// Musica --------------------//
 	private boolean musica;
 	private MediaPlayer mp;
-	private String song = "";
+	private String song = ""; 
 	int pos;
 
 	// ------------------------------//
@@ -89,11 +89,14 @@ public class Localitzacio extends Activity implements OnClickListener,
 		elegirMusica();
 		if(musica)
 			mp.start();
+		
+		// Servei
+		startService(new Intent (Localitzacio.this, ServeiMusica.class));
 
 	}
 	
 	private boolean elegirMusica(){ // Retorna true si has elegit una canso nova
-									// També vigila que estigui la opcio de musica enabled
+									// Tambï¿½ vigila que estigui la opcio de musica enabled
 		musica = pref.getBoolean("musica", false);
 
 		if (musica) {
@@ -226,8 +229,11 @@ public class Localitzacio extends Activity implements OnClickListener,
 	@Override
 	protected void onPause() {
 		super.onPause();
-		mp.pause();
-		pos = mp.getCurrentPosition();
+		if(musica){
+			mp.pause();
+			pos = mp.getCurrentPosition();
+		}
+		
 	}
 
 	@Override
@@ -259,6 +265,8 @@ public class Localitzacio extends Activity implements OnClickListener,
 
 	protected void onDestroy() {
 		super.onDestroy();
+		stopService( new Intent(Localitzacio.this,
+				servicios.ServeiMusica.class));
 	}
 
 	@Override
