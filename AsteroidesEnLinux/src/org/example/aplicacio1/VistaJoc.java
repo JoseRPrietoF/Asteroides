@@ -25,6 +25,7 @@ import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 public class VistaJoc extends View implements SensorEventListener{
 	// FILLS I TEMPS
@@ -167,13 +168,20 @@ public class VistaJoc extends View implements SensorEventListener{
 			if (str.equals("2")) tactil = true;
 			if (str.equals("3")) sensors = true;
 		}
+		if (!tactil && !teclat && !sensors){
+			Toast.makeText(getContext(), "No pots moure la nau! s'ha activat la part tàctil", Toast.LENGTH_SHORT).show();
+			tactil = true;
+		}
 		
 		multijugadors = pref.getBoolean("activarMultKey",false);
 
 		musica = pref.getBoolean("p1_key",false);
 
 		maxJugador = pref.getInt("maxJugadorsKey", 3);
-		numFragments = pref.getInt("p3_key", 3);
+		
+		// Agafem el número de fragments
+		//numFragments = pref.getInt("frag_key", 5);
+		Toast.makeText(getContext(), ""+numFragments, Toast.LENGTH_LONG).show();
 		
 		// Inicialitza so
 		soundPool = new SoundPool(MAX_REPRODUCCIONS, AudioManager.STREAM_MUSIC, 0);

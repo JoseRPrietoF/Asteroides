@@ -18,16 +18,12 @@ public class Preferencias extends PreferenceActivity {
 	
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
-		Toast.makeText(this, "onPause", Toast.LENGTH_SHORT).show();
 		super.onPause();
 	}
 
 
 	@Override
 	protected void onRestart() {
-		// TODO Auto-generated method stub
-		Toast.makeText(this, "onRestart", Toast.LENGTH_SHORT).show();
 		super.onRestart();
 	}
 

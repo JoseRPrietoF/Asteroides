@@ -20,4 +20,16 @@
         <item >2</item>
         <item >3</item>
     </string-array>
+    <string-array name="cansons">
+        <item >Daft Punk - Get Lucky</item>
+        <item >Coldplay - Paradise</item>
+        <item >Europe - Final Countdown</item>
+        <item >The Beatles - Let It Be</item>
+    </string-array>
+    <string-array name="cansonsValors">
+        <item >daft_punk_getlucky</item>
+        <item >coldplay_paradise</item>
+        <item >europe_final_countdown</item>
+        <item >beatles_let_it_be</item>
+    </string-array>
 </resources>

@@ -17,7 +17,6 @@
     <string name="p1_key">musica</string>
     <string name="p2_key">grafics</string>
     <string name="p2_summary">Se escoge la representación de gráficos</string>
-    <string name="p3_key">fragments</string>
     <string name="p3_title">Número de fragmentos</string>
     <string name="p3_summary">En cuantos trozos se divide un asteroide</string>
     <string name="p2_title">Tipo de gráficos</string>
@@ -37,5 +36,9 @@
     <string name="sensor">Moviment</string>
     <string name="control_key">control_key</string>
     <string name="control_summary">Elegeix els tipus de controls</string>
+    <string name="cansons">Elegeix la canço</string>
+    <string name="canso_summary">Elegeix la canço que més t agradi</string>
+    <string name="song_key">song_key</string>
+    <string name="frag_key">frag_key</string>
 
 </resources>

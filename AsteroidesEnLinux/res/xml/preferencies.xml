@@ -3,10 +3,17 @@
     android:key="@string/pa_key" >
 
     <CheckBoxPreference
+        android:enabled="true"
         android:key="@string/p1_key"
         android:summary="@string/p1_summary"
         android:title="@string/p1_title" />
 
+    <ListPreference
+        android:entries="@array/cansons"
+        android:entryValues="@array/cansonsValors"
+        android:key="@string/song_key"
+        android:summary="@string/canso_summary"
+        android:title="@string/cansons" android:defaultValue="1"/>
     <ListPreference
         android:defaultValue="1"
         android:entries="@array/tipusGrafics"
@@ -17,7 +24,7 @@
 
     <EditTextPreference
         android:defaultValue="3"
-        android:key="@string/p3_key"
+        android:key="@string/frag_key"
         android:summary="@string/p3_summary"
         android:title="@string/p3_title" />
 
@@ -38,9 +45,11 @@
     </PreferenceCategory>
 
     <MultiSelectListPreference
+        android:enabled="true"
         android:entries="@array/tipusControl"
         android:entryValues="@array/tipusControlValors"
         android:key="@string/control_key"
-        android:title="@string/control" android:summary="@string/control_summary"/>
-    >
+        android:summary="@string/control_summary"
+        android:title="@string/control" />
+
 </PreferenceScreen>
