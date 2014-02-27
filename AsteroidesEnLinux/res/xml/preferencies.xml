@@ -4,16 +4,14 @@
 
     <CheckBoxPreference
         android:enabled="true"
-        android:key="@string/p1_key"
         android:summary="@string/p1_summary"
-        android:title="@string/p1_title" />
+        android:title="@string/p1_title" android:key="@string/p1_key"/>
 
     <ListPreference
         android:entries="@array/cansons"
         android:entryValues="@array/cansonsValors"
-        android:key="@string/song_key"
         android:summary="@string/canso_summary"
-        android:title="@string/cansons" android:defaultValue="1"/>
+        android:title="@string/cansons" android:defaultValue="1" android:key="@string/song_key"/>
     <ListPreference
         android:defaultValue="1"
         android:entries="@array/tipusGrafics"

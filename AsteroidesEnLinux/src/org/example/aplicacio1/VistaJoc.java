@@ -180,12 +180,12 @@ public class VistaJoc extends View implements SensorEventListener{
 		maxJugador = pref.getInt("maxJugadorsKey", 3);
 		
 		// Agafem el n�mero de fragments
-		try{
+		/*try{
 			numFragments = pref.getInt("frag_key", 5);
 		} catch (NumberFormatException e){
 			numFragments = 3;
 		}
-		Toast.makeText(getContext(), ""+numFragments, Toast.LENGTH_LONG).show();
+		Toast.makeText(getContext(), ""+numFragments, Toast.LENGTH_LONG).show();*/
 		
 		// Inicialitza so
 		soundPool = new SoundPool(MAX_REPRODUCCIONS, AudioManager.STREAM_MUSIC, 0);

@@ -2,6 +2,7 @@ package org.example.aplicacio1;
 
 import java.util.ArrayList;
 import java.util.Set;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -26,7 +27,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-import servicios.*;
 
 public class Localitzacio extends Activity implements OnClickListener,
 		OnLongClickListener, OnGesturePerformedListener {
@@ -39,9 +39,9 @@ public class Localitzacio extends Activity implements OnClickListener,
 	private SharedPreferences pref;
 
 	// Musica --------------------//
-	private boolean musica;
+	private boolean musica = false;
 	private MediaPlayer mp;
-	private String song = ""; 
+	private String song = "";
 	int pos;
 
 	// ------------------------------//
@@ -85,25 +85,29 @@ public class Localitzacio extends Activity implements OnClickListener,
 
 		pref = getSharedPreferences("org.example.aplicacio1_preferences",
 				Context.MODE_PRIVATE);
-
-		elegirMusica();
-		if(musica)
-			mp.start();
+		mp = new MediaPlayer();
 		
-		// Servei
-		startService(new Intent (Localitzacio.this, ServeiMusica.class));
+		elegirMusica();
+		if (musica){
+			mp.start();
+		}
+		
+		startService(new Intent(Localitzacio.this, Servei.class));
 
 	}
-	
-	private boolean elegirMusica(){ // Retorna true si has elegit una canso nova
-									// Tambï¿½ vigila que estigui la opcio de musica enabled
+
+	private boolean elegirMusica() { // Retorna true si has elegit una canso
+										// nova
+										// També vigila que estigui la opcio de
+										// musica enabled
 		musica = pref.getBoolean("musica", false);
 
 		if (musica) {
 			// Preferencies
 			String song = pref.getString("song_key", null);
-			if (this.song.equals(song)) return false;
-
+			if (this.song.equals(song))
+				return false;
+			
 			if (song.equals("daft_punk_getlucky"))
 				mp = MediaPlayer.create(this, R.raw.daft_punk_getlucky);
 			else if (song.equals("coldplay_paradise"))
@@ -112,7 +116,7 @@ public class Localitzacio extends Activity implements OnClickListener,
 				mp = MediaPlayer.create(this, R.raw.europe_final_countdown);
 			else if (song.equals("beatles_let_it_be"))
 				mp = MediaPlayer.create(this, R.raw.beatles_let_it_be);
-			
+
 			this.song = song;
 		}
 		return true;
@@ -229,11 +233,8 @@ public class Localitzacio extends Activity implements OnClickListener,
 	@Override
 	protected void onPause() {
 		super.onPause();
-		if(musica){
-			mp.pause();
-			pos = mp.getCurrentPosition();
-		}
-		
+		mp.pause();
+		pos = mp.getCurrentPosition();
 	}
 
 	@Override
@@ -246,9 +247,10 @@ public class Localitzacio extends Activity implements OnClickListener,
 		super.onResume();
 		musica = pref.getBoolean("musica", false);
 		if (musica) {
-			if (elegirMusica()){
+			if (elegirMusica()) {
 				pos = 0;
-			} else mp.seekTo(pos);
+			} else
+				mp.seekTo(pos);
 			mp.start();
 		}
 	}
@@ -265,8 +267,6 @@ public class Localitzacio extends Activity implements OnClickListener,
 
 	protected void onDestroy() {
 		super.onDestroy();
-		stopService( new Intent(Localitzacio.this,
-				servicios.ServeiMusica.class));
 	}
 
 	@Override
