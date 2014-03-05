@@ -267,6 +267,7 @@ public class Localitzacio extends Activity implements OnClickListener,
 
 	protected void onDestroy() {
 		super.onDestroy();
+		stopService(new Intent(Localitzacio.this, Servei.class));
 	}
 
 	@Override
