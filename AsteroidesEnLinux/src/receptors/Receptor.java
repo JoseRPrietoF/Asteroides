@@ -1,4 +1,4 @@
-package Receptors;
+package receptors;
 import org.example.aplicacio1.Sobre;
 import android.content.BroadcastReceiver;
 import android.content.Context;
