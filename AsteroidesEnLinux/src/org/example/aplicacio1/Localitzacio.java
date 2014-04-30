@@ -1,10 +1,11 @@
 package org.example.aplicacio1;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.gesture.Gesture;
@@ -16,6 +17,7 @@ import android.gesture.Prediction;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,6 +27,7 @@ import android.view.View.OnLongClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -98,7 +101,7 @@ public class Localitzacio extends Activity implements OnClickListener,
 
 	private boolean elegirMusica() { // Retorna true si has elegit una canso
 										// nova
-										// Tamb� vigila que estigui la opcio de
+										// Tamb� vigila que estigui la opcio de
 										// musica enabled
 		musica = pref.getBoolean("musica", false);
 
@@ -169,7 +172,8 @@ public class Localitzacio extends Activity implements OnClickListener,
 
 	public void llansarJoc(View view) {
 		Intent i = new Intent(this, Joc.class);
-		startActivity(i);
+		//  Llança una act mitjançant un objecte intent
+		startActivityForResult(i, 1234);
 	}
 
 	public void salir(View view) {
@@ -252,6 +256,40 @@ public class Localitzacio extends Activity implements OnClickListener,
 			} else
 				mp.seekTo(pos);
 			mp.start();
+		}
+	}
+	
+	@Override
+	protected void onActivityResult(int resquestedCode, int resultCode, Intent data){
+		super.onActivityResult(resquestedCode, resultCode, data);
+		if (resquestedCode==1234 && resultCode== RESULT_OK && data != null){
+			int puntuacio = data.getExtras().getInt("puntuacio");
+			final String nom = "";
+			// ALERT PER AL NOM
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	       	 builder.setTitle("Donem el teu nom");
+	
+	       	 // Set up the input
+	       	 final EditText input = new EditText(this);
+	       	 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+	       	 input.setInputType(InputType.TYPE_CLASS_TEXT);
+	       	 input.setMinLines(6); // 6 lnes
+	       	 input.setSingleLine(false);
+	       	 input.setText("Jo");
+	       	 builder.setView(input);
+	
+	       	 // Set up the buttons
+	       	 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
+	       	     @Override
+	       	     public void onClick(DialogInterface dialog, int which) {
+	       	    	 //arr.add(input.getText().toString());
+	       	    	 nom.concat(input.getText().toString());
+	       	     }
+	       	 });
+	       	 builder.show();
+	       	 // ------- FI ALERT
+	       	 magatzem.guardarPuntuacio(puntuacio, nom, System.currentTimeMillis());
+	       	 llancarPuntuacions(null);
 		}
 	}
 

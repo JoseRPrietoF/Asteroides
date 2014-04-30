@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -19,8 +21,8 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -28,6 +30,8 @@ import android.view.View;
 import android.widget.Toast;
 
 public class VistaJoc extends View implements SensorEventListener{
+	
+	private Activity pare = null;
 	// FILLS I TEMPS
 	// FILL encarregat de processar el joc
 	private ThreadJoc fil = new ThreadJoc();
@@ -37,8 +41,8 @@ public class VistaJoc extends View implements SensorEventListener{
 	private long darrerProces = 0;
 	// Variables per ASTEROIDES
 	private Vector<Grafic> Asteroides; // Vector amb els asteroides
-	private int numAsteroides = 15; // Numero inicial de Asteroides
-	private int numFragments = 3; // Fragments en que es divideix
+	private int numAsteroides = 5; // Numero inicial de Asteroides
+	private int numFragments = 2; // Fragments en que es divideix
 	private Drawable drawableAsteroide[] = new Drawable[numFragments];
 	// Variables per la NAU
 	private Grafic nau;
@@ -77,6 +81,9 @@ public class VistaJoc extends View implements SensorEventListener{
 	SoundPool soundPool;
 	int idDispar, idExplosio;
 	final int MAX_REPRODUCCIONS = 5;
+	
+	// Variable que conte la puntuacio del joc
+	private int puntuacio = 0;
 	
 	public VistaJoc(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -227,6 +234,19 @@ public class VistaJoc extends View implements SensorEventListener{
 		return true;
 		
 	}
+	
+	public void setPare(Activity pare){
+		this.pare = pare;
+	}
+	
+	private void sortir(){
+		Bundle bundle = new Bundle();
+		bundle.putInt("puntuacio", puntuacio);
+		Intent intent = new Intent();
+		intent.putExtras(bundle);
+		pare.setResult(Activity.RESULT_OK, intent);
+		pare.finish();
+	}
 		
 	// ACUTALITZA ELS VALORS DELS ELEMENTS
 	// ES A DIR, GESTIONA ELS MOVIMENTS
@@ -282,7 +302,11 @@ public class VistaJoc extends View implements SensorEventListener{
 			} // fi for i - > tempsMissils
 
 		}
-		
+		for (Grafic asteroide: Asteroides){
+			if (asteroide.verificaColisio(nau)){
+				sortir();
+			}
+		}
 	}
 	
 	// Metodes auxiliars
@@ -305,7 +329,11 @@ public class VistaJoc extends View implements SensorEventListener{
 				Asteroides.add(asteroide);
 			}
 		}
+		puntuacio += 1000;
 		Asteroides.remove(i);
+		if (Asteroides.isEmpty()){
+			sortir();
+		}
 	}
 	// El missil i els seu temps van a la par
 	private void destrueixMissil(int i){
