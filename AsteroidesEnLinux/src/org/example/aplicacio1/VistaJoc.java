@@ -180,7 +180,7 @@ public class VistaJoc extends View implements SensorEventListener{
 			Toast.makeText(getContext(), "No pots moure la nau! s'ha activat la part t�ctil", Toast.LENGTH_SHORT).show();
 			tactil = true;
 		}
-		
+		tactil = true; // SEMPRE
 		multijugadors = pref.getBoolean("activarMultKey",false);
 
 		musica = pref.getBoolean("p1_key",false);

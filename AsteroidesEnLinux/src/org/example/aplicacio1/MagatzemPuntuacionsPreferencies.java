@@ -1,12 +1,13 @@
 package org.example.aplicacio1;
 
 import java.util.Vector;
-
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 public class MagatzemPuntuacionsPreferencies implements MagatzemPuntuacions{
 
+	private final String SEPARADOR = "///";
 	public static String PREFERENCIES = "puntuacions";
 	private Context context;
 	
@@ -19,8 +20,12 @@ public class MagatzemPuntuacionsPreferencies implements MagatzemPuntuacions{
 	public void guardarPuntuacio(int punts, String nom, long data) {
 		SharedPreferences preferencies = context.getSharedPreferences(PREFERENCIES, Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = preferencies.edit();
-		editor.putString("puntuacio", punts + " " + nom);
+		String s = preferencies.getString("puntuacio", "");
+		s +=punts + " " + nom + SEPARADOR;
+		Toast.makeText(context, s, Toast.LENGTH_LONG).show();
+		editor.putString("puntuacio", s);
 		editor.commit();
+
 	}
 
 	@Override
@@ -29,7 +34,11 @@ public class MagatzemPuntuacionsPreferencies implements MagatzemPuntuacions{
 		SharedPreferences preferencies = context.getSharedPreferences(PREFERENCIES, Context.MODE_PRIVATE);
 		String s = preferencies.getString("puntuacio", "");
 		if (s != ""){
-			result.add(s);
+			//result.add(s);
+			String[] strArr = s.split(SEPARADOR);
+			for(int i =0; i < strArr.length; i++){
+				result.add(strArr[i]);
+			}
 		}
 		return result;
 	}
