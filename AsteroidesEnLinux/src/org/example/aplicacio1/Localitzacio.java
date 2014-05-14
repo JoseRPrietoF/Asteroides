@@ -97,6 +97,7 @@ public class Localitzacio extends Activity implements OnClickListener,
 		
 		startService(new Intent(Localitzacio.this, Servei.class));
 
+		magatzem = new MagatzemPuntuacionsPreferencies(this);
 	}
 
 	private boolean elegirMusica() { // Retorna true si has elegit una canso
