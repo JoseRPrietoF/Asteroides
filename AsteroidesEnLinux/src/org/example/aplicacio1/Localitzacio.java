@@ -263,8 +263,7 @@ public class Localitzacio extends Activity implements OnClickListener,
 	protected void onActivityResult(int resquestedCode, int resultCode, Intent data){
 		super.onActivityResult(resquestedCode, resultCode, data);
 		if (resquestedCode==1234 && resultCode== RESULT_OK && data != null){
-			int puntuacio = data.getExtras().getInt("puntuacio");
-			final String nom = "";
+			final int puntuacio = data.getExtras().getInt("puntuacio");
 			// ALERT PER AL NOM
 				AlertDialog.Builder builder = new AlertDialog.Builder(this);
 	       	 builder.setTitle("Donem el teu nom");
@@ -283,13 +282,13 @@ public class Localitzacio extends Activity implements OnClickListener,
 	       	     @Override
 	       	     public void onClick(DialogInterface dialog, int which) {
 	       	    	 //arr.add(input.getText().toString());
-	       	    	 nom.concat(input.getText().toString());
+	       	    	magatzem.guardarPuntuacio(puntuacio, input.getText().toString(), System.currentTimeMillis());
+	       	    	llancarPuntuacions(null);
 	       	     }
 	       	 });
 	       	 builder.show();
 	       	 // ------- FI ALERT
-	       	 magatzem.guardarPuntuacio(puntuacio, nom, System.currentTimeMillis());
-	       	 llancarPuntuacions(null);
+	       	 
 		}
 	}
 

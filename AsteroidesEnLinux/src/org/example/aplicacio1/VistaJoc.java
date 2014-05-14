@@ -28,10 +28,11 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
+import android.media.MediaPlayer;
 
 public class VistaJoc extends View implements SensorEventListener{
 	
-	private Activity pare = null;
+	private Activity pare;
 	// FILLS I TEMPS
 	// FILL encarregat de processar el joc
 	private ThreadJoc fil = new ThreadJoc();
@@ -41,8 +42,8 @@ public class VistaJoc extends View implements SensorEventListener{
 	private long darrerProces = 0;
 	// Variables per ASTEROIDES
 	private Vector<Grafic> Asteroides; // Vector amb els asteroides
-	private int numAsteroides = 5; // Numero inicial de Asteroides
-	private int numFragments = 2; // Fragments en que es divideix
+	private int numAsteroides = 15; // Numero inicial de Asteroides
+	private int numFragments = 3; // Fragments en que es divideix
 	private Drawable drawableAsteroide[] = new Drawable[numFragments];
 	// Variables per la NAU
 	private Grafic nau;
@@ -329,8 +330,8 @@ public class VistaJoc extends View implements SensorEventListener{
 				Asteroides.add(asteroide);
 			}
 		}
-		puntuacio += 1000;
 		Asteroides.remove(i);
+		puntuacio += 1000;
 		if (Asteroides.isEmpty()){
 			sortir();
 		}
