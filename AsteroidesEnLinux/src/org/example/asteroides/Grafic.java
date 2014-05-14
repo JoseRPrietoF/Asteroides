@@ -1,4 +1,4 @@
-package org.example.aplicacio1;
+package org.example.asteroides;
 
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;

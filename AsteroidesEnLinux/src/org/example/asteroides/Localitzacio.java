@@ -1,6 +1,8 @@
-package org.example.aplicacio1;
+package org.example.asteroides;
 
 import java.util.ArrayList;
+
+import org.example.aplicacio1.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -97,7 +99,8 @@ public class Localitzacio extends Activity implements OnClickListener,
 		
 		startService(new Intent(Localitzacio.this, Servei.class));
 
-		magatzem = new MagatzemPuntuacionsPreferencies(this);
+		//magatzem = new MagatzemPuntuacionsPreferencies(this);
+		magatzem = new MagatzemPuntuacionsFitxerIntern(this);
 	}
 
 	private boolean elegirMusica() { // Retorna true si has elegit una canso

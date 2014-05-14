@@ -1,4 +1,6 @@
-package org.example.aplicacio1;
+package org.example.asteroides;
+
+import org.example.aplicacio1.R;
 
 import android.annotation.TargetApi;
 import android.app.Notification;
@@ -41,7 +43,7 @@ public class Servei extends Service {
 		Notification n = builder.build();
 		// Informacio adicional
 		PendingIntent intencioPendent = PendingIntent.getActivity(this, 0, new Intent(this, Localitzacio.class), 0);
-		n.setLatestEventInfo(this, "Jugant a Asteroides", "Informació addicional", intencioPendent);
+		n.setLatestEventInfo(this, "Jugant a Asteroides", "Informaciï¿½ addicional", intencioPendent);
 		// Pasa la notificacio creada al NM
 		nm.notify(ID_NOTIFICACIO_CREAR,n);
 		return START_STICKY;

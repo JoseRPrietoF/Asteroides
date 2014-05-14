@@ -1,4 +1,6 @@
-package org.example.aplicacio1;
+package org.example.asteroides;
+
+import org.example.aplicacio1.R;
 
 import android.app.Notification;
 import android.app.NotificationManager;

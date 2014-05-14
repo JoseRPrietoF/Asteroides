@@ -1,4 +1,4 @@
-package org.example.aplicacio1;
+package org.example.asteroides;
 
 import java.util.Vector;
 import android.content.Context;

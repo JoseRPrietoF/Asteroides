@@ -21,7 +21,7 @@
             </intent-filter>
         </receiver>
         <activity
-            android:name="org.example.aplicacio1.Localitzacio"
+            android:name="org.example.asteroides.Localitzacio"
             android:label="@string/app_name" 
             android:screenOrientation="portrait">
             <intent-filter>

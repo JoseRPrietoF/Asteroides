@@ -1,8 +1,10 @@
-package org.example.aplicacio1;
+package org.example.asteroides;
 
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
+
+import org.example.aplicacio1.R;
 
 import android.app.Activity;
 import android.content.Context;
